@@ -1,0 +1,92 @@
+  <button id = "rzp-button1">Pay</button>
+<script src = "https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+   //"key": "rzp_live_gFMyGo6jRrWa2H", 
+ "key": "rzp_test_MHsWaJVqGMWb7t", // Enter the Key ID generated from the Dashboard
+    "amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
+    "currency": "INR",
+    "name": "Test product",
+    //"display_amount": "400",
+    //"display_currency": "INR",
+    "description": "Anand",
+    //"image": "https://example.com/your_logo",
+   "order_id": "order_HZC7j9UQO1ek99",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+   //"account_id": "acc_HEyRCtS22UYncL",
+    //"callback_url":"https://razorpay.com/docs",
+     //"redirect":"true",
+    //"retry":"false",
+    /*"method": {
+                "card": false,
+                },
+    "instruments": [
+                {
+                "method": "card",
+                "types":["debit"]
+                },
+    
+    "restrictions": {
+      "allow": [
+        {
+          "method": "card",
+          "types": ["debit"]
+        },
+        {
+          "method": "upi"
+        },
+        {
+          "method": "netbanking"
+        }
+      ]
+    }
+  */
+//"personalization": false, // Should Checkout show its preferred methods?
+  	"handler": function (response){
+      alert(response.razorpay_payment_id);
+   		alert(response.razorpay_order_id);
+  		alert(response.razorpay_signature)
+    },
+
+    //"callback_url":"https://webhook.site/6a525b76-f88a-4b10-a855-75489662dbb8",
+    "prefill": {
+        "email": "anand.maldikar@test.com",
+        "contact": "9969123456",
+        //"method": "card",
+        /*'card[name]': 'Gaurav Kumar',
+        'card[number]': '4111111111111111',
+        'card[cvv]': '566',
+        'card[expiry_month]': '10',
+        'card[expiry_year]': '20'*/
+        //"method": "upi"
+        //"vpa": ""
+    },
+    "notes": {
+        "merchant_order_id": "12345"
+    },
+    /*"theme": {
+        //"close_button": "false",
+          //"hide_topbar": "false"
+    },*/
+  "modal":{
+  "escape": "false",
+  "handleback": "false"
+ },
+ "readonly":{
+  "email": "true",
+  "contact": "true"
+ },
+/*"method":{
+"netbanking":"true",
+"upi":"true",
+"wallet":"false",
+"card":"false"
+},*/
+
+};
+var rzp1 = new Razorpay(options);
+
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script></body></html>
